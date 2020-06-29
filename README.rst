@@ -6,6 +6,8 @@ A method for the identification of informative features in scRNA-seq and scATAC-
 
 The package is available under a GPL-v3 license.
 
+More extensive documentation and usage examples will follow shortly.
+
 Installation
 ============
 

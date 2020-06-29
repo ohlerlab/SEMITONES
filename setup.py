@@ -57,7 +57,7 @@ setup(
         'Private :: Do Not Upload',
     ],
     project_urls={
-        #'Documentation': 'https://escoring.readthedocs.io/',
+        'Documentation': 'https://escoring.readthedocs.io/',
         'Changelog': 'https://escoring.readthedocs.io/en/latest/changelog.html',
         'Issue Tracker': 'https://github.com/ohlerlab/escoring/issues',
     },
