@@ -26,7 +26,7 @@ def read(*names, **kwargs):
 setup(
     name='escoring',
     version='0.0.0',
-    license='MIT',
+    license='GPLv3',
     description='A method for the identification of informative features in scRNA-seq and scATAC-seq data.',
     long_description='%s\n%s' % (
         re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
