@@ -1,0 +1,8 @@
+numpy
+scipy
+pandas
+tables
+plotly
+scikit-learn
+sphinx>=1.3
+sphinx-rtd-theme
