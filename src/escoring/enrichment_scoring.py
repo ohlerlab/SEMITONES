@@ -139,12 +139,13 @@ def calculate_escores(X, query, metric=None, S=None, scale_exp=None,
         print("Enrichment scoring complete")
 
     if "cells" in locals():
-        rows = [list(mpres[i][0]) for i in len(len(mpres))]
-        rows = genes[itertools.chain.from_iterable(rows)]
+        rows = [list(mpres[i][0]) for i in range(len(mpres))]
+        rows = [genes[i] for i in itertools.chain.from_iterable(rows)]
+        cols = [cells[i] for i in query]
     else:
         rows = [list(mpres[i][0]) for i in range(len(mpres))]
         rows = list(itertools.chain.from_iterable(rows))
-    cols = query
+        cols = query
 
     scores = [pd.DataFrame(mpres[i][1]) for i in range(len(mpres))]
     if (optim_over == "rows") and (ncpu > 1):
