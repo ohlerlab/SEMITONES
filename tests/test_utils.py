@@ -3,15 +3,15 @@ import inspect
 import numpy as np
 from scipy.sparse import csr_matrix
 
-from escoring._utils import _chunk_generator
-from escoring._utils import _chunk_indices
-from escoring._utils import _distances
-from escoring._utils import _knn_dists
-from escoring._utils import _linreg_get_beta
-from escoring._utils import _make_generator
-from escoring._utils import _permute
-from escoring._utils import _similarities
-from escoring._utils import _std_sparse
+from SEMITONES._utils import _chunk_generator
+from SEMITONES._utils import _chunk_indices
+from SEMITONES._utils import _distances
+from SEMITONES._utils import _knn_dists
+from SEMITONES._utils import _linreg_get_beta
+from SEMITONES._utils import _make_generator
+from SEMITONES._utils import _permute
+from SEMITONES._utils import _similarities
+from SEMITONES._utils import _std_sparse
 
 
 def test_knn_dists():

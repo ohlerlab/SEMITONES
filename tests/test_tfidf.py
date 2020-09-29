@@ -1,9 +1,9 @@
 import numpy as np
 from scipy.sparse import csr_matrix
 
-from escoring.tfidf import TFIDF
-from escoring.tfidf import _inverse_document_frequency
-from escoring.tfidf import _term_frequency
+from SEMITONES.tfidf import TFIDF
+from SEMITONES.tfidf import _inverse_document_frequency
+from SEMITONES.tfidf import _term_frequency
 
 
 def test_tfidf():

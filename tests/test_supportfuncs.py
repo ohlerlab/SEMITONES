@@ -3,10 +3,10 @@ import pandas as pd
 from scipy.sparse import csr_matrix
 from sklearn.metrics.pairwise import pairwise_kernels
 
-from escoring.support_funcs import binarize
-from escoring.support_funcs import pairwise_similarities
-from escoring.support_funcs import sig_bool
-from escoring.support_funcs import sig_dictionary
+from SEMITONES.support_funcs import binarize
+from SEMITONES.support_funcs import pairwise_similarities
+from SEMITONES.support_funcs import sig_bool
+from SEMITONES.support_funcs import sig_dictionary
 
 
 def test_binarize():

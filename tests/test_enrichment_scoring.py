@@ -1,15 +1,15 @@
 import numpy as np
 from scipy.sparse import csr_matrix
 
-from escoring.enrichment_scoring import _enrichment_scoring
-from escoring.enrichment_scoring import _interaction_set
-from escoring.enrichment_scoring import _max_set
-from escoring.enrichment_scoring import _median_set
-from escoring.enrichment_scoring import _min_set
-from escoring.enrichment_scoring import calculate_escores
-from escoring.enrichment_scoring import feature_set_values
-from escoring.enrichment_scoring import permute
-from escoring.enrichment_scoring import sig_interval
+from SEMITONES.enrichment_scoring import _enrichment_scoring
+from SEMITONES.enrichment_scoring import _interaction_set
+from SEMITONES.enrichment_scoring import _max_set
+from SEMITONES.enrichment_scoring import _median_set
+from SEMITONES.enrichment_scoring import _min_set
+from SEMITONES.enrichment_scoring import calculate_escores
+from SEMITONES.enrichment_scoring import feature_set_values
+from SEMITONES.enrichment_scoring import permute
+from SEMITONES.enrichment_scoring import sig_interval
 
 
 def test_permute():

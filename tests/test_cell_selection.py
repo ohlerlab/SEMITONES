@@ -1,6 +1,6 @@
 import numpy as np
 
-from escoring.cell_selection import from_knn_dist
+from SEMITONES.cell_selection import from_knn_dist
 
 
 def test_alg1():
