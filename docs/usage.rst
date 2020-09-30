@@ -2,6 +2,6 @@
 Usage
 =====
 
-To use escoring in a project::
+To use SEMITONES in a project::
 
-	import escoring
+	import SEMITONES

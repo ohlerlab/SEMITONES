@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 
 setup(
-    name='escoring',
+    name='SEMITONES',
     version='0.0.0',
     license='GPLv3',
     description='A method for the identification of informative features in scRNA-seq and scATAC-seq data.',
@@ -34,7 +34,7 @@ setup(
     ),
     author='Anna Hendrika Cornelia Vlot',
     author_email='hvlot@mdc-berlin.de',
-    url='https://github.com/ohlerlab/escoring',
+    url='https://github.com/ohlerlab/SEMITONES',
     packages=find_packages('src'),
     package_dir={'': 'src'},
     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
@@ -57,9 +57,9 @@ setup(
         'Private :: Do Not Upload',
     ],
     project_urls={
-        'Documentation': 'https://escoring.readthedocs.io/',
-        'Changelog': 'https://escoring.readthedocs.io/en/latest/changelog.html',
-        'Issue Tracker': 'https://github.com/ohlerlab/escoring/issues',
+        #'Documentation': 'https://SEMITONES.readthedocs.io/',
+        #'Changelog': 'https://SEMITONES.readthedocs.io/en/latest/changelog.html',
+        'Issue Tracker': 'https://github.com/ohlerlab/SEMITONES/issues',
     },
     keywords=[
         # eg: 'keyword1', 'keyword2', 'keyword3',
