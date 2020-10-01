@@ -38,8 +38,8 @@ def binarize(X, t=None):
     return X
 
 
-def pairwise_similarities(X, query, metric=None, n_neighbors=None,
-                          metric_params=None):
+def pairwise_similarities(X, query, metric=None, knn_metric=None,
+                          n_neighbors=None, p=None, metric_params=None):
     """Returns the similarity matrix of every sample entry in
        X and the sample entries in the query.
 
@@ -57,9 +57,15 @@ def pairwise_similarities(X, query, metric=None, n_neighbors=None,
         available. Alternatively, “knn_jaccard” is implemented,
         where the jaccard similarity over the kNN-graph is
         calculated.
+    knn_metric: str
+        If using "knn_jaccard", the metric to use for knn-graph
+        construction using sklearn.neighbors.kneighbors_graph.
     n_neighbours: int
         If using “knn_jaccard” the number of nearest neighbours
         used for kNN-graph construction.
+    p: int
+        If using "knn_jaccard" the power parameter to pass
+        to sklearn.neighbors.kneighbors_graph.
     metric_params: dict
         A dictionary of arguments to pass to the sklearn
         sklearn.metrics.pairwise_distances or
@@ -71,13 +77,16 @@ def pairwise_similarities(X, query, metric=None, n_neighbors=None,
         between all samples and the query samples."""
 
     metric = "euclidean" if metric is None else metric
+    knn_metric = "euclidean" if knn_metric is None else knn_metric
 
     if isinstance(X, pd.DataFrame):
         query = [X.index.get_loc(i) for i in query]
         X = X.values
 
     if "knn" in metric:
-        S = _similarities(X, metric=metric, n_neighbors=n_neighbors)
+        S = _similarities(X, metric=metric, knn_metric=knn_metric,
+                          n_neighbors=n_neighbors,
+                          p=p, metric_params=metric_params)
         return S[:, query]
     else:
         return _similarities(X, X[query, :], metric=metric,

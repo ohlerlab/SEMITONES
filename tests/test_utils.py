@@ -6,7 +6,7 @@ from scipy.sparse import csr_matrix
 from SEMITONES._utils import _chunk_generator
 from SEMITONES._utils import _chunk_indices
 from SEMITONES._utils import _distances
-from SEMITONES._utils import _knn_dists
+from SEMITONES._utils import _knn_sim
 from SEMITONES._utils import _linreg_get_beta
 from SEMITONES._utils import _make_generator
 from SEMITONES._utils import _permute
@@ -14,7 +14,7 @@ from SEMITONES._utils import _similarities
 from SEMITONES._utils import _std_sparse
 
 
-def test_knn_dists():
+def test_knn_sim():
 
     minitest = np.array([
         [0.68174634, 0.09686306, 0.10710519, 0.19573925, 0.40389495,
@@ -34,7 +34,7 @@ def test_knn_dists():
                      [0.33333333, 0, 0.33333333, 1., 0.33333333],
                      [0.33333333, 0.33333333, 0.33333333, 0.33333333, 1.]])
 
-    test = _knn_dists(minitest, n_neighbors=2)
+    test = _knn_sim(minitest, n_neighbors=2)
 
     np.testing.assert_allclose(test, true)
 

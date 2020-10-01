@@ -17,8 +17,8 @@ oneminus = ["braycurtis", "correlation", "dice", "jaccard", "kulsinksi",
             "sigmoid"]
 
 
-def _knn_dists(X, metric=None, n_neighbors=None, p=None,
-               metric_params=None):
+def _knn_sim(X, metric=None, n_neighbors=None, p=None,
+             metric_params=None):
     """Compute the Jaccard distance over the kNN graph.
     The metric parameter can be used to specify which metric
     is used to construct the kNN graph."""
@@ -61,16 +61,15 @@ def _distances(X1, X2=None, metric=None, metric_params=None):
         return pairwise_distances(X=X1, Y=X2, metric=metric)
 
 
-def _similarities(X1, X2=None, metric=None, knn_metric=None, n_neighbors=None,
-                  sym=None, p=None, metric_params=None):
+def _similarities(X1, X2=None, metric=None, knn_metric=None,
+                  n_neighbors=None, p=None, metric_params=None):
     """Calls sklearn.pairwise.pairwise_distances or
     sklearn.pairwise_pairwise_kernels and returns the similarity
     between X1 and X2.
 
-    n_neighbors, sym, p, and metric_params are only for knn_metrics."""
+    n_neighbors and p are only for knn_metrics."""
 
     metric = "euclidean" if metric is None else metric
-    knn_metric = "euclidean" if knn_metric is None else knn_metric
 
     if metric in kernels:
         if metric_params is None:
@@ -79,9 +78,9 @@ def _similarities(X1, X2=None, metric=None, knn_metric=None, n_neighbors=None,
             return pairwise_kernels(X1, X2, metric, **metric_params)
     elif metric == "knn_jaccard":
         if X2 is None:
-            return _knn_dists(X1, method="jaccard", metric=knn_metric,
-                              n_neighbors=n_neighbors, sym=sym, p=p,
-                              metric_params=metric_params)
+            return _knn_sim(X1, metric=knn_metric,
+                            n_neighbors=n_neighbors, p=p,
+                            metric_params=metric_params)
         else:
             print("Not implemented for two matrices")
             return None
