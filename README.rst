@@ -5,7 +5,7 @@ SEMITONES (Single-cEll Marker IdentificaTiON by Enrichment Scoring)
 Description
 ===========
 
-SEMITONES identifies highly enriched features in single-cell omics data without prior clustering. For a detailed description of SEMITONES, please check out the `manuscript <https://www.biorxiv.org/content/10.1101/2020.11.17.386664v1.full>`. For analysis scripts and notebooks relating to the manuscript, please consult the `manuscript's GitHub page <https://github.com/ohlerlab/SEMITONES_paper>`.
+SEMITONES identifies highly enriched features in single-cell omics data without prior clustering. For a detailed description of SEMITONES, please check out the `manuscript <https://www.biorxiv.org/content/10.1101/2020.11.17.386664v1.full>`_. For analysis scripts and notebooks relating to the manuscript, please consult the `manuscript's GitHub page <https://github.com/ohlerlab/SEMITONES_paper>`_.
 
 Installation
 ============
