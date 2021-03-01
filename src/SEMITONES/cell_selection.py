@@ -185,8 +185,7 @@ def from_knn_dist(X, start=None, n_ret=None, metric=None,
         eliminated.append(s)  # eliminate s
 
         if np.nan in d[nNNs, :]:
-            print("A problem has occured. Please report an issue to the
-                   author.")
+            print("A problem has occured. Please report an issue to the author.")
 
         if roundup is True:
             condition = X.shape[0] - len(eliminated) > nNN
