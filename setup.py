@@ -72,7 +72,7 @@ setup(
         'scipy',
         'tables',
         'matplotlib',
-        'sklearn'
+        'scikit-learn'
     ],
     extras_require={
         # eg:
