@@ -141,7 +141,7 @@ def from_knn_dist(X, start=None, n_ret=None, metric=None,
 
     # set parameters
     n = X.shape[0]  # number of cells
-    n_ret = n_ret  # number of cells to return
+    n_ret = 1 if n_ret == 0 else n_ret  # make sure n_ret is not 0
     if roundup is True:
         nNN = ceil((n - n_ret) / n_ret)  # number of NNs to exlcude
     else:
