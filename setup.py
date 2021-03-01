@@ -66,12 +66,12 @@ setup(
     ],
     python_requires='>=3.6',
     install_requires=[
-        'numpy'
-        'pandas'
-        'plotly'
-        'scipy'
-        'tables'
-        'matplotlib'
+        'numpy',
+        'pandas',
+        'plotly',
+        'scipy',
+        'tables',
+        'matplotlib',
         'sklearn'
     ],
     extras_require={
