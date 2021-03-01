@@ -68,7 +68,7 @@ setup(
     install_requires=[
         'numpy',
         'pandas',
-        'plotly',
+        'plotly==4.14.3',
         'scipy',
         'tables',
         'matplotlib',
