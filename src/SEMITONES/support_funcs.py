@@ -77,7 +77,6 @@ def pairwise_similarities(X, query, metric=None, knn_metric=None,
         between all samples and the query samples."""
 
     metric = "euclidean" if metric is None else metric
-    knn_metric = "euclidean" if knn_metric is None else knn_metric
 
     if isinstance(X, pd.DataFrame):
         query = [X.index.get_loc(i) for i in query]

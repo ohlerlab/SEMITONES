@@ -255,7 +255,7 @@ def from_kmeans_pp(X, n_cells, seed=None):
     n_cells: int
         The number of cells to return from the population.
     seed: int
-        The random_state seed to enable reporudcibility.
+        The random_state seed to enable reproducibility.
 
     Returns
     -------

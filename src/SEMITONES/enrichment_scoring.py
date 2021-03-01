@@ -82,7 +82,7 @@ def calculate_escores(X, query, metric=None, S=None, scale_exp=None,
         Choose “cols” if enrichment scores will be computed for many
         features and “rows” if there are many reference cells in the
         query. Paralellization over “rows” is only beneficial if enough
-        memory is availble.
+        memory is available.
     n_chunks: int
         The number of chunks to divide the feature matrix into when
         processing a scipy CSR matrix. If memory is limited, choosing
@@ -185,7 +185,7 @@ def permute(X, n=None, axis=None, seed=None):
     seed: int
         The seed to pass to numpy.random for reproducibility
     axis: 0 or 1
-        Whether to permute teh rows or columns of the dataframe.
+        Whether to permute the rows or columns of the dataframe.
         0 corresponds to permuting the expression vectors of a
         feature matrix of shape (n_samples, n_features).
 
@@ -210,7 +210,7 @@ def sig_interval(pscores, n_sds, query=None):
     pscores: pandas dataframe
         A pandas dataframe of enrichment scores obtained from
         permuted expression vectors (e.g. from permute(X)).
-        throug  the permute() function.
+        through  the permute() function.
     n_sds: int
         The number of standard deviations away from the mean of
         the pscores at which to declare significance. Defaults

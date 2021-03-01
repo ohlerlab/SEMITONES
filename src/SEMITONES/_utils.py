@@ -116,7 +116,7 @@ def _permute(X, n=None, axis=None, seed=None):
 
 
 def _linreg_get_beta(x, y, scale_exp):
-    """Use Scipy linregress to get the regression coeffiecient."""
+    """Use Scipy linregress to get the regression coefficient."""
     from scipy.stats import linregress
 
     if scale_exp is True:
