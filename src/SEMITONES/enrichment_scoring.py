@@ -104,7 +104,7 @@ def calculate_escores(X, query, metric=None, S=None, scale_exp=None,
             optim_over = "rows"
     if n_chunks is None:
         n_chunks = ceil(X.shape[1] * 0.01) if n_chunks is None else n_chunks
-    ncpu = mp.cpu_count() if ncpu is None else ncpu
+    ncpu = 1 if ncpu is None else ncpu
     make_copy = True if make_copy is None else make_copy
 
     if make_copy is True:
