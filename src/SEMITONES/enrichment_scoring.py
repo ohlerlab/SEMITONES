@@ -77,7 +77,7 @@ def calculate_escores(X, query, metric=None, S=None, scale_exp=None,
         enrichment scores.
     ncpu: int
         Number of CPUs the use when using parallel processing. Defaults
-        to the maximum number of CPUs available.
+        to 1.
     optim_over: "cols" or "rows"
         Choose “cols” if enrichment scores will be computed for many
         features and “rows” if there are many reference cells in the
