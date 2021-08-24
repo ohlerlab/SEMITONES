@@ -62,7 +62,10 @@ def calculate_escores(X, query, metric=None, S=None, scale_exp=None,
         with respect to which enrichment scoring should be performed. If
         providing a pandas dataframe, these should be strings. If
         providing a numpy array or sparse matrix, these should be
-        indices (int).
+        indices (int).  If providing a matrix S that contains a different
+        metric to rank cells by and X is a dataframe, the strings may
+        be identifiers of the columns in S, even if these do not
+        correspond to any cell (i.e. sample) in X.
     metric: str, optional
         If S is None, this metric will be used to calculate the similarity
         to the reference cell for each cell. Available metrics are those in
@@ -111,8 +114,9 @@ def calculate_escores(X, query, metric=None, S=None, scale_exp=None,
         X = X.copy()
 
     if isinstance(X, pd.DataFrame):
-        query = [X.index.get_loc(i) for i in query]
         cells, genes = X.index, X.columns
+        if all(i in cells for i in query):
+            query = [X.index.get_loc(i) for i in query]
         X = X.values
 
     if S is None:
@@ -150,7 +154,10 @@ def calculate_escores(X, query, metric=None, S=None, scale_exp=None,
     if "cells" in locals():
         rows = [list(mpres[i][0]) for i in range(len(mpres))]
         rows = [genes[i] for i in itertools.chain.from_iterable(rows)]
-        cols = [cells[i] for i in query]
+        if all(cells[item] in cells for item in query):
+            cols = [cells[i] for i in query]
+        else:
+            cols = query
     else:
         rows = [list(mpres[i][0]) for i in range(len(mpres))]
         rows = list(itertools.chain.from_iterable(rows))
