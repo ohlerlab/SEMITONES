@@ -68,8 +68,8 @@ def calculate_escores(X, query, metric=None, S=None, scale_exp=None,
         to the reference cell for each cell. Available metrics are those in
         sklearn.metrics.pairwise_distances and
         sklearn.metrics.pairwise.pairwise_kernels modules.
-    S: matrix-like object (n_samples, n_features), optional
-        A similarity matrix where each column represents the distance to
+    S: numpy array (n_samples, n_features), optional
+        A similarity matrix where each column represents the similarity to
         the reference cell for each cell in X. The columns should be ordered
         as the cells in the query.
     scale_exp: boolean
