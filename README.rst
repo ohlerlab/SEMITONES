@@ -31,7 +31,7 @@ Documentation on individual functions can be found in the project`s `wiki <https
 System
 ======
 
-SEMITONES has been tested on a Linux system running CentOS 7 and developed in and test for Python 3.6.
+SEMITONES has been tested on a Linux system running CentOS 7 and developed in and tested for Python 3.6.
 
 To use the figure widget for cell selection in Jupyter Lab or Jupyter Notebooks, please consult the `plotly installation instructions <https://github.com/plotly/plotly.py>`_.
 
