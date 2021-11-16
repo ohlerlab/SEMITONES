@@ -64,7 +64,7 @@ setup(
     keywords=[
         # eg: 'keyword1', 'keyword2', 'keyword3',
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.6, <3.10',
     install_requires=[
         'numpy',
         'pandas',
