@@ -345,3 +345,112 @@ def feature_set_values(X, sets, combtype):
         return _interaction_set(X, sets)[1]
     elif combtype == "binary":
         return _binary_set(X, sets)[1]
+
+
+def pvals_per_cell(escores, pscores, mt_cor=None, alpha=None, ret=None):
+    """Computes the p-value with respect to a permutation null for each
+    gene in each reference cell.
+    -----
+    escores: matrix-like
+        A np.array or pd.DataFrame that contains the enrichment scores
+        for each gene (row) in each reference cell (column)
+    pscores: matrix-like
+        A np.array or pd.DataFrame that contains the enrichment scores
+        for each permutated gene (row) in each reference cell (column).
+    mt_cor: str
+        The method by which to perform multiple testing correction.
+    alpha: float
+        Family-wise error rate.
+    ret: str
+        Whether to return p-values ("p"), corrected p-values ("q"),
+        or both ("pq"). Defaults to corrected p-values ("q").
+    -----
+    Returns: a pd.DataFrame of p-values, corrected p-values,
+    or both.
+    """
+
+    from scipy.stats import norm
+    from statsmodels.sandbox.stats.multicomp import multipletests 
+    
+    mt_cor = "bonferroni" if mt_cor is None else mt_cor
+    alpha = .05 if alpha is None else alpha
+    ret = "q" if ret is None else ret
+
+    if isinstance(escores, pd.DataFrame):
+        genes, cells, escores = escores.index, escores.columns, escores.values
+
+    mu, sigma = np.mean(pscores, axis=0), np.std(pscores, axis=0, ddof=1)
+    pvals = 2 * (1 - norm.cdf(abs(escores), loc=mu, scale=sigma))
+
+    if (ret == "q") or (ret == "pq"):
+        
+        pvals_cor = []
+        for i in range(pvals.shape[1]):
+            pvals_cor.append(multipletests(pvals[:, i], alpha=alpha,
+                                           method=mt_cor)[1])
+        # make corrected p-value dataframe
+        if "cells" in locals():
+            pvals_cor = pd.DataFrame(pvals_cor, columns=genes, index=cells).T
+        else:
+            pvals_cor = pd.DataFrame(pvals_cor).T 
+
+    if (ret == "pq") or (ret == "p"):
+        if "cells" in locals():
+            pvals = pd.DataFrame(pvals, index=genes, columns=cells)
+        else:
+            pvals = pd.DataFrame(pvals)
+
+    # return the appropiate dataframe
+    if ret == "q":
+        return pvals_cor
+    elif ret == "pq":
+        return pvals, pvals_cor
+    else:
+        return pvals
+
+
+def pvals_per_gene(escores, pscores, mt_cor="bonferroni", alpha=0.05):
+    """Computes a p-value per gene.
+    -----
+    escores: matrix-like
+        A np.array or pd.DataFrame that contains the enrichment scores
+        for each gene (row) in each reference cell (column)
+    pscores: matrix-like
+        A np.array or pd.DataFrame that contains the enrichment scores
+        for each permutated gene (row) in each reference cell (column).
+    mt_cor: str
+        The method by which to perform multiple testing correction.
+    alpha: float
+        Family-wise error rate.
+    ret: str
+        Whether to return p-values ("p"), corrected p-values ("q"),
+        or both ("pq"). Defaults to corrected p-values ("q").
+    -----
+    Returns: a pd.DataFrame of p-values, corrected p-values,
+    or both.
+    """
+
+    from scipy.stats import ks_2samp
+    from statsmodels.stats.multitest import multipletests
+
+    mt_cor = "bonferroni" if mt_cor is None else mt_cor
+    alpha = .05 if alpha is None else alpha
+    
+    if isinstance(escores, pd.DataFrame):
+        egenes, ecells, escores = escores.index, escores.columns, escores.values
+    if isinstance(pscores, pd.DataFrame):
+        pgenes, pcells, pscores = pscores.index, pscores.columns, pscores.values
+
+    n = escores.shape[0]
+    ks = [ks_2samp(escores[i, :], pscores[i, :]) for i in range(n)]
+    ks = pd.DataFrame(data=[(d, k) for d, k in ks],
+                      columns=["d", "p"])
+    if "egenes" in locals():
+        ks.index = egenes
+
+    r, q, s, b = multipletests(ks.loc[:, "p"], alpha, method=mt_cor)
+
+    ks["q"] = q
+
+    return ks
+
