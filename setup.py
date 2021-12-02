@@ -72,7 +72,8 @@ setup(
         'scipy',
         'tables',
         'matplotlib',
-        'scikit-learn'
+        'scikit-learn',
+        'statsmodels'
     ],
     extras_require={
         # eg:
