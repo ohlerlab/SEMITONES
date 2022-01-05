@@ -68,6 +68,63 @@ def from_gui(umap, figsize=(None, None)):
     return fig
 
 
+def from_gui_3d(umap, figsize=(None, None)):
+    """Creates a figure widget to manually select cells from a 3D UMAP embedding.
+
+    Parameters
+    ----------
+    umap: matrix-like
+        The input coordinates of the 3D UMAP representation of the cells in a sample.
+    figsize: (int, int)
+        The size of a figure to pass to the plotly graph_object.
+
+    Returns
+    -------
+    A plotly graph_object"""
+
+    if figsize == (None, None):
+        figsize = (1500, 1500)
+    else:
+        figsize = figsize
+    t = "Please select cells of interest"
+
+    data = [graph_objects.Scatter3d(x=umap[:, 0], y=umap[:, 1], z=umap[:, 2], mode="markers")]
+    layout = graph_objects.Layout(template="plotly_dark",
+                                  width=figsize[0], height=figsize[1],
+                                  title=graph_objects.layout.Title(text=t),
+                                  plot_bgcolor="#000000",
+                                  xaxis_showgrid=False, xaxis_zeroline=False,
+                                  yaxis_showgrid=False, yaxis_zeroline=False,
+                                  xaxis_showticklabels=False,
+                                  yaxis_showticklabels=False,
+                                  font={"family": "Courier New, monospace",
+                                        "size": 18, "color": "#ff8d00"})
+
+    fig = graph_objects.FigureWidget(data, layout)
+    fig.layout.hovermode = "closest"
+
+    scatter = fig.data[0]
+    colors = ["#ffffff"] * umap.shape[0]
+    scatter.marker.color = colors
+    scatter.marker.line = dict(width=0)
+    scatter.marker.opacity = 0.75
+    scatter.marker.size = [5] * umap.shape[0]
+
+    def _update_point(trace, points, selector):
+        c = list(scatter.marker.color)
+        s = list(scatter.marker.size)
+        #o = scatter.marker.opacity
+        for i in points.point_inds:
+            c[i] = "#ff8d00"
+            s[i] = 15
+            with fig.batch_update():
+                scatter.marker.color = c
+                scatter.marker.size = s
+    scatter.on_click(_update_point)
+
+    return fig
+
+
 def get_cells_from_gui(fig):
     """Returns the cells selected in from_gui()
 
