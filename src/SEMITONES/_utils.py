@@ -100,7 +100,7 @@ def _permute(X, n=None, axis=None, seed=None):
     if (issparse(X)) and (X.getformat() not in ["csr", "csc"]):
         X = X.tocsr()
 
-    n = 100 if n is None else n
+    #n = 100 if n is None else n
     axis = 0 if axis is None else axis
     seed = 42 if seed is None else seed
 
@@ -108,9 +108,9 @@ def _permute(X, n=None, axis=None, seed=None):
 
     indices = np.random.permutation(X.shape[axis])
     P = X[:, indices] if axis == 1 else X[indices, :]
-    for _ in repeat(None, n - 1):
-        indices = np.random.permutation(indices)
-        P = P[:, indices] if axis == 1 else X[indices, :]
+    #for _ in repeat(None, n - 1):
+    #    indices = np.random.permutation(indices)
+    #    P = P[:, indices] if axis == 1 else X[indices, :]
 
     return P
 
